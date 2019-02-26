@@ -504,6 +504,11 @@ element.
     },
 
     _handleError: function(request, error) {
+      // Ignore errors about aborting the request when abortRequests = true
+      if (this.abortRequests && request.aborted) {
+        return;
+      }
+
       if (this.verbose) {
         Polymer.Base._error(error);
       }
